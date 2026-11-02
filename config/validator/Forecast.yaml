@@ -1,0 +1,42 @@
+App\Entity\Forecast:
+    properties:
+        location:
+            - NotNull:
+                  groups: [create, edit]
+        Date:
+            - NotNull:
+                  groups: [create, edit]
+            - GreaterThanOrEqual:
+                  value: today
+                  message: '[create] A new forecast cannot be dated in the past.'
+                  groups: [create]
+        Temperature:
+            - NotNull:
+                  groups: [create, edit]
+            - Range:
+                  min: -50
+                  max: 50
+                  notInRangeMessage: '[create] Temperature must be between {{ min }} and {{ max }} °C.'
+                  groups: [create]
+            - Range:
+                  min: -90
+                  max: 60
+                  notInRangeMessage: '[edit] Temperature must be between {{ min }} and {{ max }} °C.'
+                  groups: [edit]
+        Humidity:
+            - Range:
+                  min: 0
+                  max: 100
+                  notInRangeMessage: 'Humidity must be between {{ min }} and {{ max }} %.'
+                  groups: [create, edit]
+        Rain:
+            - Range:
+                  min: 0
+                  max: 100
+                  notInRangeMessage: 'Rain must be between {{ min }} and {{ max }} %.'
+                  groups: [create, edit]
+        Wind:
+            - GreaterThanOrEqual:
+                  value: 0
+                  message: 'Wind speed cannot be negative.'
+                  groups: [create, edit]

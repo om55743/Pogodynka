@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forecasts{% endblock %}
+
+{% block body %}
+    <h1>Forecasts</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Temperature (°C)</th>
+            <th>Humidity (%)</th>
+            <th>Rain (%)</th>
+            <th>Wind (m/s)</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for forecast in forecasts %}
+            <tr>
+                <td>{{ forecast.id }}</td>
+                <td>{{ forecast.location.Name }}</td>
+                <td>{{ forecast.Date ? forecast.Date|date('Y-m-d') : '' }}</td>
+                <td>{{ forecast.Temperature }}</td>
+                <td>{{ forecast.Humidity }}</td>
+                <td>{{ forecast.Rain }}</td>
+                <td>{{ forecast.Wind }}</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-secondary" href="{{ path('app_forecast_show', {'id': forecast.id}) }}">show</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ path('app_forecast_edit', {'id': forecast.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_forecast_new') }}">Create new</a>
+{% endblock %}

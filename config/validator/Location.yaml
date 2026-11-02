@@ -1,0 +1,35 @@
+App\Entity\Location:
+    properties:
+        Name:
+            - NotBlank:
+                  groups: [create, edit]
+            - Length:
+                  min: 2
+                  max: 100
+                  minMessage: '[create] City name must be at least {{ limit }} characters long.'
+                  groups: [create]
+            - Length:
+                  min: 3
+                  max: 100
+                  minMessage: '[edit] City name must be at least {{ limit }} characters long.'
+                  groups: [edit]
+        Country:
+            - NotBlank:
+                  groups: [create, edit]
+        Latitude:
+            - Range:
+                  min: -90
+                  max: 90
+                  notInRangeMessage: '[create] Latitude must be between {{ min }} and {{ max }}.'
+                  groups: [create]
+            - Range:
+                  min: -90
+                  max: 90
+                  notInRangeMessage: '[edit] Latitude must be between {{ min }} and {{ max }}.'
+                  groups: [edit]
+        Longitude:
+            - Range:
+                  min: -180
+                  max: 180
+                  notInRangeMessage: 'Longitude must be between {{ min }} and {{ max }}.'
+                  groups: [create, edit]
