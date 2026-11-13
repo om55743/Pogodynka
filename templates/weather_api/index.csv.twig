@@ -1,0 +1,11 @@
+city,country,date,celsius,fahrenheit,humidity,chance_for_precipitation,wind
+{% for m in measurements %}
+{{- city }},
+{{- country }},
+{{- m.Date|date('Y-m-d') }},
+{{- m.Temperature }},
+{{- m.Fahrenheit }},
+{{- m.Humidity }},
+{{- m.Rain }},
+{{- m.Wind }}
+{% endfor %}

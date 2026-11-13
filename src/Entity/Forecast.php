@@ -22,7 +22,7 @@ class Forecast
     private ?\DateTime $Date = null;
 
     #[ORM\Column]
-    private ?int $Temperature = null;
+    private ?float $Temperature = null;
 
     #[ORM\Column]
     private ?int $Humidity = null;
@@ -62,16 +62,25 @@ class Forecast
         return $this;
     }
 
-    public function getTemperature(): ?int
+    public function getTemperature(): ?float
     {
         return $this->Temperature;
     }
 
-    public function setTemperature(int $Temperature): static
+    public function setTemperature(float $Temperature): static
     {
         $this->Temperature = $Temperature;
 
         return $this;
+    }
+
+    public function getFahrenheit(): ?float
+    {
+        if ($this->Temperature === null) {
+            return null;
+        }
+
+        return $this->Temperature * 9 / 5 + 32;
     }
 
     public function getHumidity(): ?int
